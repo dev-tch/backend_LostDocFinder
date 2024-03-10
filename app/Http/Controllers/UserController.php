@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return "ok user returned \n";
+        //return "ok user returned \n";
     }
 
     /**
@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return "this create";
+        //return "this create";
     }
 
     /**
