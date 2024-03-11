@@ -1,0 +1,6 @@
+-- add new columns for larvel created_at updated_at
+use ldf_dev_db;
+ALTER TABLE users
+ADD COLUMN session_id VARCHAR(255) DEFAULT NULL,
+ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
