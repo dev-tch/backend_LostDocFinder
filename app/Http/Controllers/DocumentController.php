@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class DocumentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * get list of documents
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * create new document 
      */
     public function store(Request $request)
     {
@@ -41,20 +41,16 @@ class DocumentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update description of document
      */
-    //public function update(Request $request, document $document)
     public function update(Request $request, $doc_id)
     {
         $new_desc = $request->input('doc_description');
-        //$documentId = $request->input('doc_id');
         Log::info("update doc id: ".$doc_id );
         Log::info("update doc  newdesc: ". $new_desc );
         $document = Document::find($doc_id);
 
         if ($document) {
-            // Document found, proceed with deletion
-            //$document->delete();
             $document->doc_description = $new_desc;
             $document->save();
             return response()->json([
@@ -69,7 +65,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * delete document
      */
     public function destroy(Request $request)
     {

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * create new user
      */
     public function store(Request $request)
     {

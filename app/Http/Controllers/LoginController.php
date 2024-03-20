@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
-    // authenticated user via (username/password)
-    // generate new token for the authenticated user
+    // authenticated user via (username/password) + generate session token
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([

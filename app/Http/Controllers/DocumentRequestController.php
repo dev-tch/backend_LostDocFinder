@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class DocumentRequestController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * get list of documents requests belongs to authenticated user
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class DocumentRequestController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * create new document request
      */
     public function store(Request $request)
     {
@@ -75,7 +75,7 @@ class DocumentRequestController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update document request description
      */
     public function update(Request $request, $req_id)
     {
@@ -100,7 +100,7 @@ class DocumentRequestController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * delete document request 
      */
     public function destroy(Request $request)
     {
@@ -157,7 +157,7 @@ class DocumentRequestController extends Controller
     }
 
     /**
-     * get contact information contact of user
+     * get user contact information
      */
     public function getContacts(Request $request)
     {
@@ -171,7 +171,6 @@ class DocumentRequestController extends Controller
         if ($req_type == "doc_found")
         {
             // search description of request doc_lost
-            // search 
             $documentRequestLost = DocumentRequest::where('doc_id', $doc_id )
                                      ->where('doc_type', $doc_type )
                                      ->where('req_type', 'doc_lost')
