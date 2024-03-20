@@ -21,14 +21,6 @@ class DocumentRequestController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-      //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -80,22 +72,6 @@ class DocumentRequestController extends Controller
         {
             return response()->json(['error'=>'Failed to create Request'], 422);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(DocumentRequest $documentRequest)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DocumentRequest $documentRequest)
-    {
-        //
     }
 
     /**
@@ -180,6 +156,9 @@ class DocumentRequestController extends Controller
         return $count ;
     }
 
+    /**
+     * get contact information contact of user
+     */
     public function getContacts(Request $request)
     {
         $doc_id     =  $request->input('doc_id'); 
@@ -193,27 +172,47 @@ class DocumentRequestController extends Controller
         {
             // search description of request doc_lost
             // search 
-            $docreq1 = DocumentRequest::where('doc_id', $doc_id )
+            $documentRequestLost = DocumentRequest::where('doc_id', $doc_id )
                                      ->where('doc_type', $doc_type )
                                      ->where('req_type', 'doc_lost')
                                      ->where('req_status', "Responded_reply_finder")
                                      ->first();
-            $user1 = User::where('id', $docreq1->user_id)->first();
-            $description = $docreq1->req_description;
-            $phone = $user1->phone;
-            $email = $user1->email;
+            if ($documentRequestLost)
+            {
+                $user1 = User::where('id', $documentRequestLost->user_id)->first();
+                $description = $documentRequestLost->req_description;
+                $phone = $user1->phone;
+                $email = $user1->email;
+            }
+            else
+            {
+                // contact not found
+                return response()->json([
+                    'error' => 'contact not found!!, document request of type doc_lost No Found!!',
+                ], 404); 
+            }
         }    
         else if  ($req_type == "doc_lost"){
             // search description of request doc_found
-            $docreq2 = DocumentRequest::where('doc_id', $doc_id )
+            $documentRequestFound = DocumentRequest::where('doc_id', $doc_id )
                                      ->where('doc_type', $doc_type )
                                      ->where('req_type', 'doc_found')
                                      ->where('req_status', "Responded_reply_owner")
                                      ->first();
-            $user2 = User::where('id', $docreq2->user_id)->first();
-            $description = $docreq2->req_description;
-            $phone = $user2->phone;
-            $email = $user2->email;
+            if ($documentRequestFound)
+            {
+                $user2 = User::where('id', $documentRequestFound->user_id)->first();
+                $description = $documentRequestFound->req_description;
+                $phone = $user2->phone;
+                $email = $user2->email;
+            }
+            else
+            {
+                // contact not found
+                return response()->json([
+                    'error' => 'contact not found!!, document request of type doc_found not found!!',
+                ], 404);
+            }
         } 
 
         return response()->json([

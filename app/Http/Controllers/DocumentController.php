@@ -21,14 +21,6 @@ class DocumentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -46,22 +38,6 @@ class DocumentController extends Controller
         else{
             return response()->json(['error'=>'Failed to create Docuement'], 422);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(document $document)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request, $doc_id)
-    {
-       
     }
 
     /**
@@ -115,6 +91,9 @@ class DocumentController extends Controller
             ], 404);
         }
     }
+     /**
+     * get description of document
+     */
     public function description(Request $request){
         $doc_id   = $request->input("doc_id");
         $doc_type = $request->input("doc_type");

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::resource('users', UserController::class);
+Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
 	Route::post('/logout', [LoginController::class, 'logout']);
